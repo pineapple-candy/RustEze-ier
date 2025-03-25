@@ -21,6 +21,8 @@ public class TestAuto extends LinearOpMode {
                 .waitSeconds(2)
                 .strafeRight(4,0.5)
                 .strafeRight(2,1)
+                .rotatePath(2,0.3)
+                .moveInDirection(2,2,90)
                 .build();
     }
 }

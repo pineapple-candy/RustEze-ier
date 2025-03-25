@@ -15,6 +15,19 @@ public class PathActions extends Path.PathBuilder {
         return this;
     }
 
+    public PathActions moveInDirection(double distance, double speed, double trueNorthDir) {
+        addNode(new MoveNode(distance,speed,trueNorthDir));
+        return this;
+    }
+
+    public PathActions rotatePath(double radius, double speed) {
+        addNode(new MoveNode(radius,speed,90));
+        addNode(new MoveNode(radius,speed,180));
+        addNode(new MoveNode(radius,speed,270));
+        addNode(new MoveNode(radius,speed,360));
+        return this;
+    }
+
     public PathActions waitSeconds(double seconds) {
         addNode(new WaitNode(seconds*1000));
         return this;
