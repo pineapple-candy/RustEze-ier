@@ -4,7 +4,12 @@ import org.firstinspires.ftc.teamcode.PathSystem.Nodes.MoveNode;
 import org.firstinspires.ftc.teamcode.PathSystem.Nodes.Node;
 import org.firstinspires.ftc.teamcode.PathSystem.Nodes.WaitNode;
 
-public class PathActions extends Path.PathBuilder {
+import java.util.ArrayList;
+
+public class PathActions /*extends Path.PathBuilder*/ {
+
+    private ArrayList<Node> builderPath;
+
     public PathActions moveForward(double distance, double speed) {
         addNode(new MoveNode(distance,speed,0));
         return this;
@@ -33,9 +38,13 @@ public class PathActions extends Path.PathBuilder {
         return this;
     }
 
-    @Override
+
     public PathActions addNode(Node node) {  // Override to return PathActions
-        super.addNode(node);
+        builderPath.add(node);
         return this;
+    }
+
+    public Path build() {
+        return new Path(builderPath);
     }
 }

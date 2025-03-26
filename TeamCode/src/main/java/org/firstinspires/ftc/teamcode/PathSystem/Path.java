@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Path {
     private ArrayList<Node> nodeArray = new ArrayList<Node>(); // This variable w
-    private Path(ArrayList<Node> builtPath) {
+    public Path(ArrayList<Node> builtPath) {
         this.nodeArray = builtPath;
     }
 
@@ -24,18 +24,18 @@ public class Path {
         return nodeArray;
     }
 
-    public static class PathBuilder {
-        private ArrayList<Node> builderPath;
-
-
-        public PathBuilder addNode(Node node) {
-            builderPath.add(node);
-            return this;
-        }
-
-        public Path build() {
-            return new Path(builderPath);
-        }
-
-    }
+//    public static class PathBuilder {
+//        private ArrayList<Node> builderPath;
+//
+//
+//        public PathBuilder addNode(Node node) {
+//            builderPath.add(node);
+//            return this;
+//        }
+//
+//        public Path build() {
+//            return new Path(builderPath);
+//        }
+//
+//    }
 }
