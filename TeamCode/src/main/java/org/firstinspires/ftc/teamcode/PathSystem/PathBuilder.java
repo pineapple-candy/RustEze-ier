@@ -6,26 +6,26 @@ import org.firstinspires.ftc.teamcode.PathSystem.Nodes.WaitNode;
 
 import java.util.ArrayList;
 
-public class PathActions /*extends Path.PathBuilder*/ {
+public class PathBuilder /*extends Path.PathBuilder*/ {
 
     private ArrayList<Node> builderPath;
 
-    public PathActions moveForward(double distance, double speed) {
+    public PathBuilder moveForward(double distance, double speed) {
         addNode(new MoveNode(distance,speed,0));
         return this;
     }
 
-    public PathActions strafeRight(double distance, double speed) {
+    public PathBuilder strafeRight(double distance, double speed) {
         addNode(new MoveNode(distance, speed, 90));
         return this;
     }
 
-    public PathActions moveInDirection(double distance, double speed, double trueNorthDir) {
+    public PathBuilder moveInDirection(double distance, double speed, double trueNorthDir) {
         addNode(new MoveNode(distance,speed,trueNorthDir));
         return this;
     }
 
-    public PathActions rotatePath(double radius, double speed) {
+    public PathBuilder rotatePath(double radius, double speed) {
         addNode(new MoveNode(radius,speed,90));
         addNode(new MoveNode(radius,speed,180));
         addNode(new MoveNode(radius,speed,270));
@@ -33,13 +33,12 @@ public class PathActions /*extends Path.PathBuilder*/ {
         return this;
     }
 
-    public PathActions waitSeconds(double seconds) {
+    public PathBuilder waitSeconds(double seconds) {
         addNode(new WaitNode(seconds*1000));
         return this;
     }
 
-
-    public PathActions addNode(Node node) {  // Override to return PathActions
+    public PathBuilder addNode(Node node) {  // Override to return PathActions
         builderPath.add(node);
         return this;
     }
