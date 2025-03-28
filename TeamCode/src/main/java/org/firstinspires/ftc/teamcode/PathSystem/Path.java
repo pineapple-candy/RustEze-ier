@@ -24,4 +24,24 @@ public class Path {
         return nodeArray;
     }
 
+    public Node getNode(int index) { return nodeArray.get(index); }
+
+    // Path logic
+
+    int currentIndex = 0;
+
+    public boolean update() {
+        Node currentNode = nodeArray.get(currentIndex);
+        if (currentNode.update()) {
+            return true;
+        } else {
+            currentIndex += 1;
+
+            if (currentIndex > nodeArray.size()) {
+                return false;
+            }
+
+            return true;
+        }
+    }
 }
