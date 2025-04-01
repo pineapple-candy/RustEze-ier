@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class PathBuilder /*extends Path.PathBuilder*/ {
 
-    private ArrayList<Node> builderPath;
+    private ArrayList<Node> builderPath = new ArrayList<>();
 
     public PathBuilder moveForward(double distance, double speed) {
         addNode(new MoveNode(distance,speed,0));
