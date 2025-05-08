@@ -37,7 +37,7 @@ public class Path {
         } else {
             currentIndex += 1;
 
-            if (currentIndex > nodeArray.size()) {
+            if (currentIndex >= nodeArray.size()) {
                 return false;
             }
 
