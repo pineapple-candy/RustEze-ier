@@ -12,9 +12,18 @@ import java.util.Map;
 
 public class MecanumDrive extends Drive {
 
-    public MecanumDrive(HardwareMap hardwareMap) {
+    private boolean FOD = false;
+
+    private static String LBName = Util.LB_DRIVE_NAME;
+    private static String LFName = Util.LF_DRIVE_NAME;
+    private static String RBName = Util.RB_DRIVE_NAME;
+    private static String RFName = Util.RF_DRIVE_NAME;
+
+    public MecanumDrive(HardwareMap hardwareMap, boolean FOD) {
         super(motorHashMap(hardwareMap));
         brakeMotors();
+
+        this.FOD = FOD;
 
         // Reverse motors as needed.
         reverseMotor(Util.LF_DRIVE_NAME);
@@ -24,10 +33,10 @@ public class MecanumDrive extends Drive {
         HashMap<String,DcMotor> motorMap = new HashMap<>();
 
         // Gives a hash map of all of the motors.
-        motorMap.put(Util.LB_DRIVE_NAME, hardwareMap.get(DcMotor.class,Util.LB_DRIVE_NAME));
-        motorMap.put(Util.LF_DRIVE_NAME, hardwareMap.get(DcMotor.class,Util.LF_DRIVE_NAME));
-        motorMap.put(Util.RB_DRIVE_NAME, hardwareMap.get(DcMotor.class,Util.RB_DRIVE_NAME));
-        motorMap.put(Util.RF_DRIVE_NAME, hardwareMap.get(DcMotor.class,Util.RF_DRIVE_NAME));
+        motorMap.put(LBName, hardwareMap.get(DcMotor.class,Util.LB_DRIVE_NAME));
+        motorMap.put(LFName, hardwareMap.get(DcMotor.class,Util.LF_DRIVE_NAME));
+        motorMap.put(RBName, hardwareMap.get(DcMotor.class,Util.RB_DRIVE_NAME));
+        motorMap.put(RFName, hardwareMap.get(DcMotor.class,Util.RF_DRIVE_NAME));
 
         return motorMap;
     }
@@ -35,6 +44,24 @@ public class MecanumDrive extends Drive {
     @Override
     public void drive(Gamepad gamepad) {
 
+        // Thanks GoBuilda for code
+        double y = -gamepad.left_stick_y; // Remember, Y stick value is reversed
+        double x = gamepad.left_stick_x * 1.1; // Counteract imperfect strafing
+        double rx = gamepad.right_stick_x;
+
+        // Denominator is the largest motor power (absolute value) or 1
+        // This ensures all the powers maintain the same ratio,
+        // but only if at least one is out of the range [-1, 1]
+        double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
+        double LFPower = (y + x + rx) / denominator;
+        double LBPower = (y - x + rx) / denominator;
+        double RFPower = (y - x - rx) / denominator;
+        double RBPower = (y + x - rx) / denominator;
+
+        powerMotor(LFName,LFPower);
+        powerMotor(LBName,LBPower);
+        powerMotor(RFName,LBPower);
+        powerMotor(RBName,RBPower);
     }
 
 }

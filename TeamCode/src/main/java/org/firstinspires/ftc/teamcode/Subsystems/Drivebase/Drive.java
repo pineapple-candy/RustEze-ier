@@ -32,6 +32,9 @@ public abstract class Drive {
     public void reverseMotor(String motorName) {
         driveMotors.get(motorName).setDirection(DcMotorSimple.Direction.REVERSE);
     }
+    public void powerMotor(String name, double speed) {
+        driveMotors.get(name).setPower(speed);
+    }
     public void stop(double speed) {
         powerMotors(0);
     }

@@ -16,10 +16,10 @@ public class Util {
     public static String RIGHT_DRIVE_NAME;
 
     // MECANUM DRIVE - names as in the hardware map
-    public static String LF_DRIVE_NAME = "LF";
-    public static String LB_DRIVE_NAME = "LB";
-    public static String RF_DRIVE_NAME = "RF";
-    public static String RB_DRIVE_NAME = "RB";
+    public static final String LF_DRIVE_NAME = "LF";
+    public static final String LB_DRIVE_NAME = "LB";
+    public static final String RF_DRIVE_NAME = "RF";
+    public static final String RB_DRIVE_NAME = "RB";
 
     /*
         Random methods
