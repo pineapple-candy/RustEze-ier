@@ -2,10 +2,13 @@ package org.firstinspires.ftc.teamcode.OpModes;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.PathSystem.Nodes.MoveNode;
+import org.firstinspires.ftc.teamcode.PathSystem.Nodes.ForwardNode;
 
+import org.firstinspires.ftc.teamcode.PathSystem.Nodes.Node;
 import org.firstinspires.ftc.teamcode.PathSystem.Path;
 import org.firstinspires.ftc.teamcode.PathSystem.PathBuilder;
+
+import java.util.ArrayList;
 
 // Experimental class
 
@@ -13,11 +16,14 @@ public class TestAuto extends LinearOpMode {
 
     Path mySickPath;
 
+    ArrayList<Node> path;
+
     @Override
     public void runOpMode(){
+
         mySickPath = new PathBuilder()
                 .moveForward(1,2)
-                .addNode(new MoveNode(1,2,30))
+                .addNode(new ForwardNode(1,2))
                 .waitSeconds(2)
                 .strafeRight(4,0.5)
                 .strafeRight(2,1)
@@ -30,9 +36,12 @@ public class TestAuto extends LinearOpMode {
         double pathSize = mySickPath.getSize();
 
         addForward(mySickPath);
+
+        while (mySickPath.update());
+
     }
 
     private void addForward(Path path) {
-        path.addNode(new MoveNode(5,0.3,90));
+        path.addNode(new ForwardNode(5,0.3,90));
     }
 }

@@ -1,18 +1,15 @@
 package org.firstinspires.ftc.teamcode.PathSystem.Nodes;
 
-public class MoveNode extends Node {
+public class StrafeNode extends Node {
     private double distance;
-    private double direction;
     private double speed;
 
-    public MoveNode(double distance, double speed, double direction) {
+    public StrafeNode(double distance, double speed) {
         this.distance = distance;
-        this.direction = direction;
         this.speed = speed;
     }
 
     private boolean started = false;
-
     @Override
     public boolean update() {
         if (!started) {
